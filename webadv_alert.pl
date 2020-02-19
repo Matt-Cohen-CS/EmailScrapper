@@ -36,13 +36,13 @@ $mech->get($url);
 # get term options
 $content = $mech->content();
 
-@terms = $content =~ /<select name="_ctl0:MainContent:ddlTerm" id="MainContent_ddlTerm">(.*|\n)*<\/select>/;
+@terms = $content =~ /<select name="_ctl0:MainContent:ddlTerm" id="MainContent_ddlTerm">(.|\n)*<\/select>/;
 
 foreach my $an (@terms) {
 	print $an, "\n";
 }
 
-#Checko if term is valid
+#Check if term is valid
 
 # Select the term
 $term = $ARGV[0];

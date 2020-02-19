@@ -34,20 +34,20 @@ $mech = WWW::Mechanize->new();
 $mech->get($url);
 
 # get term options
-# $content = $mech->content();
-#@terms = $content =~/value=(.+)>(.+)</g;
-$allTerms = $mech->content();
+$content = $mech->content();
 
-@terms = $allTerms =~ /<select name="_ctl0:MainContent:ddlTerm" id="MainContent_ddlTerm">(.*|\n)*<\/select>/;
+@terms = $content =~ /<select name="_ctl0:MainContent:ddlTerm" id="MainContent_ddlTerm">(.*|\n)*<\/select>/;
+
 foreach my $an (@terms) {
 	print $an, "\n";
-	}
-$mech->field("_ctl0:MainContent:ddlTerm", $termTotal);
+}
 
-# Select the term (Check if term is vaild)
+#Checko if term is valid
+
+# Select the term
 $term = $ARGV[0];
 $mech->field("_ctl0:MainContent:ddlTerm", $term);
-#have a list of term
+
 # Select the subject
 $subject = $ARGV[1];
 $mech->field("_ctl0:MainContent:ddlSubj_1", $subject);

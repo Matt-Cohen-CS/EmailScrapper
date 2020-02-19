@@ -11,7 +11,7 @@ sub help {
       -Subject       : which Subject the class is in, e.g. \"ENGLISH (EN)\"
       -Course Number : course number, e.g., 202
       -Section Number: course section, e.g., 51
-      -Email address : alert recipient's email address
+      -Email address : alert recipient's email address, e.g. test@test.com
 
     \n";
 

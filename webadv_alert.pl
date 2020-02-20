@@ -11,7 +11,7 @@ sub help {
       -Subject       : which Subject the class is in, e.g. \"ENGLISH (EN)\"
       -Course Number : course number, e.g., 202
       -Section Number: course section, e.g., 51
-      -Email address : alert recipient's email address, e.g. test@test.com
+      -Email address : alert recipient's email address, e.g. test\@test.com
 
     \n";
 
@@ -33,19 +33,23 @@ $url = "https://www2.monmouth.edu/muwebadv/wa3/search/SearchClassesV2.aspx";
 $mech = WWW::Mechanize->new();
 $mech->get($url);
 
-# get term options
+# Get term options
 $content = $mech->content();
 
-@terms = $content =~ /<select name="_ctl0:MainContent:ddlTerm" id="MainContent_ddlTerm">(.|\n)*<\/select>/;
+# Using option tag to find terms and add them to terms array
+@terms = $content =~ /<option value="[0-9]{2,}.*\/[A-Z]{2,}">(.*)<\/option>/g;
 
-foreach my $an (@terms) {
-	print $an, "\n";
+
+# Check if term is valid. If invalid notify and exit.
+if (my ($matched) = grep $_ eq $ARGV[0], @terms) {
+    $term = $ARGV[0];
+}
+else {
+  print "Term entered is invalid. \n";
+  help();
 }
 
-#Check if term is valid
-
 # Select the term
-$term = $ARGV[0];
 $mech->field("_ctl0:MainContent:ddlTerm", $term);
 
 # Select the subject

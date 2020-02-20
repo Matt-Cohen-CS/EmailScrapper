@@ -18,6 +18,22 @@ sub help {
   print $message;
 }
 
+sub checkterm {
+  $input = $_[0];
+
+  if (my ($matched) = grep $_ eq $input, @terms) {
+    $term = $ARGV[0];
+  }
+  else {
+    print "Term entered is invalid. \nValid terms are: \n";
+
+    foreach $term (sort @terms) {
+      print "  $term \n";
+    }
+    exit(1);
+  }
+}
+
 ######## End of subroutines #######
 
 $numargs = $#ARGV + 1;
@@ -40,18 +56,8 @@ $content = $mech->content();
 @terms = $content =~ /<option value="[0-9]{2,}.*\/[A-Z]{2,}">(.*)<\/option>/g;
 
 
-# Check if term is valid. If invalid list valid terms.
-if (my ($matched) = grep $_ eq $ARGV[0], @terms) {
-    $term = $ARGV[0];
-}
-else {
-  print "Term entered is invalid. \nValid terms are: \n";
-
-  foreach $term (sort @terms) {
-    print "  $term \n";
-  }
-  exit(1);
-}
+# Check if term input is valid.
+checkterm($ARGV[0]);
 
 # Select the term
 $mech->field("_ctl0:MainContent:ddlTerm", $term);

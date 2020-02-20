@@ -78,6 +78,13 @@ $mech->field("_ctl0:MainContent:txtSectionNum_1", $sectionnumber);
 $mech->click_button(name => "_ctl0:MainContent:btnSubmit");
 
 # Get resulting html
-$page = $mech->content();
+$searchresult = $mech->content();
 
-print $page;
+# Check if searched class exist.
+if ( $searchresult =~ /<span id="MainContent_lblMsg" class="errorText">No classes meeting the search criteria have been found.<\/span>/ ) {
+  print "That class does not exist. \n";
+  help();
+}
+else {
+  print $searchresult;
+}

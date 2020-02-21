@@ -1,5 +1,3 @@
-# webadv_alert.pl:
-
 sub help {
 
   $message = "
@@ -91,7 +89,9 @@ if ( $searchresult =~ /<span id="MainContent_lblMsg" class="errorText">No classe
 }
 
 $email = $ARGV[4];
-$class = $subject ."-". $coursenumber ."-" . $sectionnumber;
+
+@subjectcode = $subject =~ /\((.*)\)/;
+$class = $subjectcode ."-". $coursenumber ."-" . $sectionnumber;
 
 %mail = ( To      => $email,
           From    => 'ClassSniper@monmouth.edu',

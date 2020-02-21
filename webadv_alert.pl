@@ -44,6 +44,7 @@ if ($numargs < 5 || $ARGV[0] =~ /--help/) {
 }
 
 use WWW::Mechanize;
+use Mail::Sendmail;
 
 $url = "https://www2.monmouth.edu/muwebadv/wa3/search/SearchClassesV2.aspx";
 $mech = WWW::Mechanize->new();
@@ -84,14 +85,28 @@ if ( $searchresult =~ /<span id="MainContent_lblMsg" class="errorText">No classe
   print "That class does not exist. \n";
   help();
 }
-else {
-  print $searchresult;
-}
+
+$email = $ARGV[4];
+$class = $subject ."-". $coursenumber ."-" . $sectionnumber;
+
+%mail = ( To      => $email,
+          From    => 'ClassSniper@monmouth.edu',
+          Subject => $class . ' is open!',
+          Message => 'The class (' . $class . ') you are monitoring has opened!
+
+Monmouth University Class Sniper
+created by Nico Cuccinillo, Matt Cohen, and Steven Cassidy'
+        );
 
 # Check status of searched class
 if ( $searchresult =~ /<td>Clsd.*?<\/td>/ ) {
   print "Class is closed \n";
 }
 if ( $searchresult =~ /<td>Open.*?<\/td>/ ) {
-  print "Class is open \n";
+  if (sendmail %mail) {
+    print "Mail sent OK.\n"
+  }
+  else {
+    print "Error sending mail: $Mail::Sendmail::error \n"
+  }
 }

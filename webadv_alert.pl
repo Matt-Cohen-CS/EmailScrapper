@@ -95,7 +95,7 @@ $class = $subject ."-". $coursenumber ."-" . $sectionnumber;
           Message => 'The class (' . $class . ') you are monitoring has opened!
 
 Monmouth University Class Sniper
-created by Nico Cuccinillo, Matt Cohen, and Steven Cassidy'
+created by Nico Cucciniello, Matt Cohen, and Steven Cassidy'
         );
 
 # Check status of searched class

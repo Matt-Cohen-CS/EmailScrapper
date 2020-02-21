@@ -6,12 +6,16 @@ sub help {
 
   Using: perl -w webadv_alert.pl <arguments>
 
-    where <arguments> are the following seprated by a space:
+    where <arguments> are the following separated by a space:
       -Term          : which semester the class is in, e.g. \"20/SP - 2020 Spring\"
       -Subject       : which Subject the class is in, e.g. \"ENGLISH (EN)\"
       -Course Number : course number, e.g., 202
       -Section Number: course section, e.g., 51
       -Email address : alert recipient's email address, e.g. test\@test.com
+
+      or
+
+      --help         : display script usage
 
     \n";
 

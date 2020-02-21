@@ -91,7 +91,7 @@ if ( $searchresult =~ /<span id="MainContent_lblMsg" class="errorText">No classe
 $email = $ARGV[4];
 
 @subjectcode = $subject =~ /\((.*)\)/;
-$class = $subjectcode ."-". $coursenumber ."-" . $sectionnumber;
+$class = $subjectcode[0] ."-". $coursenumber ."-" . $sectionnumber;
 
 %mail = ( To      => $email,
           From    => 'ClassSniper@monmouth.edu',

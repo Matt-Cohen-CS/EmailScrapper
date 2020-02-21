@@ -96,7 +96,7 @@ $class = $subjectcode[0] ."-". $coursenumber ."-" . $sectionnumber;
 %mail = ( To      => $email,
           From    => 'ClassSniper@monmouth.edu',
           Subject => $class . ' is open!',
-          Message => 'The class (' . $class . ') you are monitoring has opened!
+          Message => 'The class (' . $class . ') you are monitoring for the ' . $term . ' semester has opened!'
 
 Monmouth University Class Sniper
 created by Nico Cucciniello, Matt Cohen, and Steven Cassidy'

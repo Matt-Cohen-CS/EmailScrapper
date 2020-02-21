@@ -1,5 +1,9 @@
-sub help {
+# Nico Cucciniello, Matt Cohen, and Steven Cassidy
+# CS-371-01
+# Feb 24th, 2019
+# Perl Project
 
+sub help {
   $message = "
 
   Using: perl -w webadv_alert.pl <arguments>

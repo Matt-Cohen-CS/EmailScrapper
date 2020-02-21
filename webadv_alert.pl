@@ -1,7 +1,7 @@
 # webadv_alert.pl:
 
 sub help {
-  # Using a Perl multi-line string:
+
   $message = "
 
   Using: perl -w webadv_alert.pl <arguments>
@@ -55,8 +55,7 @@ $content = $mech->content();
 # Using option tag to find terms and add them to terms array
 @terms = $content =~ /<option value="[0-9]{2,}.*\/[A-Z]{2,}">(.*)<\/option>/g;
 
-
-# Check if term input is valid.
+# Check if term input is valid
 checkterm($ARGV[0]);
 
 # Select the term
@@ -80,11 +79,19 @@ $mech->click_button(name => "_ctl0:MainContent:btnSubmit");
 # Get resulting html
 $searchresult = $mech->content();
 
-# Check if searched class exist.
+# Check if searched class exist
 if ( $searchresult =~ /<span id="MainContent_lblMsg" class="errorText">No classes meeting the search criteria have been found.<\/span>/ ) {
   print "That class does not exist. \n";
   help();
 }
 else {
   print $searchresult;
+}
+
+# Check status of searched class
+if ( $searchresult =~ /<td>Clsd.*?<\/td>/ ) {
+  print "Class is closed \n";
+}
+if ( $searchresult =~ /<td>Open.*?<\/td>/ ) {
+  print "Class is open \n";
 }
